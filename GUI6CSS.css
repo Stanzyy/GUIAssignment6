@@ -38,8 +38,6 @@ button {
 /* table color and border */
 table {
     border: 3px solid #331933; /*dark purple*/
-     
-    
 }
 /*make first row light blue */
 table tr:first-child td {
