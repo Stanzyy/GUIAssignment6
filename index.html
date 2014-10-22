@@ -1,74 +1,108 @@
 <!DOCTYPE html>
+<!--
+Nicolas Stanzione
+ngstanzione@gmail.com
+I am a Senior majoring in Computer Science at UMass Lowell enrolled in 91.461
+File:C:\Users\Stanzy\Documents\NetBeansProjects\GUI6\public_html\index.html
+File created: 9/20/2014
+This site will serve as a dynamic multiplication table
+-->
 <html>
-
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Guiassignment6 : ">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Guiassignment6</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Stanzyy/GUIAssignment6">View on GitHub</a>
-
-          <h1 id="project_title">Guiassignment6</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Stanzyy/GUIAssignment6/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Stanzyy/GUIAssignment6/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>&lt;!DOCTYPE html&gt;</p>
-
-
-
-<p>
-    </p>
-        Dynamic Multiplication Table
-        
-        
-        &lt;!-- import jquery and my stylesheet --&gt;
-        
-        
-    
-    
-        <div>
-            &lt;!-- form with 4 inputs that take numbers and submit button. javascript:void() action so that submit
-            does nothing. ---&gt;
-            
-            Start Horizontal: <br>
-            Start Vertical: <br>
-            End Horizontal: <br>
-            End Vertical: <br>
-            Generate Table
-            
+    <head>
+        <title>Dynamic Multiplication Table</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- import jquery and my stylesheet -->
+        <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="GUI6CSS.css">
+    </head>
+    <body>
+        <div id ="Input_Form">
+            <!-- form with 4 inputs that take numbers and submit button. javascript:void() action so that submit
+            does nothing. --->
+            <form id ="form" action = "javascript:void(0)">
+            Start Horizontal: <input type="number" name="start_horizontal" id="start_horizontal"><br>
+            Start Vertical: <input type="number" name="start_vertical" id="start_vertical"><br>
+            End Horizontal: <input type="number" name="end_horizontal" id="end_horizontal"><br>
+            End Vertical: <input type="number" name="end_vertical" id="end_vertical"><br>
+            <button>Generate Table</button>
+            </form>
         </div>
-        
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Guiassignment6 maintained by <a href="https://github.com/Stanzyy">Stanzyy</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+        <script>
+            // get all the numbers from user input
+            var form = document.getElementById('form');
+                start_horizontal = document.getElementById('start_horizontal');
+                end_horizontal = document.getElementById('end_horizontal');
+                start_vertical = document.getElementById('start_vertical');
+                end_vertical = document.getElementById('end_vertical');
+            $("#form").submit(function() { // this function happens when submit button is clicked
+                    $("table").remove(); //these two removes and background color changes reset page after user error
+                    $("h1").remove();
+                    var myElement = document.querySelector("#start_horizontal");
+                    myElement.style.backgroundColor = "white";
+                    var myElement = document.querySelector("#start_vertical");
+                    myElement.style.backgroundColor = "white";
+                    //changes user input to ints
+                    start_horizontal_value = parseInt(start_horizontal.value);
+                    end_horizontal_value = parseInt(end_horizontal.value);
+                    start_vertical_value = parseInt(start_vertical.value);
+                    end_vertical_value = parseInt(end_vertical.value);
+                    str = " ";
+                    /*bunch of if statements to check for user error. if there is an error then the erroneous form is highlighted
+                    red and an error message is displayed. The function thenr returns and starts from the beginning  */ 
+                    if(start_vertical_value > end_vertical_value && start_horizontal_value > end_horizontal_value ){
+                        var myElement1 = document.querySelector("#start_vertical");
+                        myElement1.style.backgroundColor = "red";
+                        var myElement2 = document.querySelector("#start_horizontal");
+                        myElement2.style.backgroundColor = "red";
+                        str +="<h1 style=\"color:red\"> Your start vertical value and start horizontal value are greater than their end values </h1>";
+                        $(this).append(str);
+                        return;
+                    }
+                    // next two ifs are similar to above just different cases
+                    else if(start_horizontal_value > end_horizontal_value){
+                        var myElement = document.querySelector("#start_horizontal");
+                        myElement.style.backgroundColor = "red";
+                        str +="<h1 style=\"color:red\"> Your start horizontal value is greater than the end value </h1>";
+                        $(this).append(str);
+                        return;
+                    }
+                    else if(start_vertical_value > end_vertical_value){
+                        var myElement = document.querySelector("#start_vertical");
+                        myElement.style.backgroundColor = "red";
+                        str +="<h1 style=\"color:red\"> Your start vertical value is greater than the end value </h1>";
+                        $(this).append(str);
+                        return;
+                    }
+                    
+                        
+                    // put all my html code into a string then append to document at end
+                    str += "<h1>Multiplication table</h1>";
+                    str += "<table border=2 width=50%";
+                  
+                    str += "<tr><td> x </td>";
+                    // for loop for first row
+                    for(var i = start_horizontal_value; i <= end_horizontal_value; i++){
+                        str +="<td>" + i + "</td>";
+                    }
+                    str += "</tr>";
+                    //for loop for columns and multiplication table
+                    for(var j = start_vertical_value; j <= end_vertical_value; j++){
+                        str += "<tr><td>" +j+ "</td>";
+                        for(var i = start_horizontal_value; i <= end_horizontal_value; i++){
+                            str += "<td>" + i*j + "</td>";
+                        }
+                        str +="</tr>";
+                    }
+                    str += "</table>"; 
+                    //append all the html code to document
+                    $(this).append(str);
+                    
+                    return;
+            });
+            
+           
+            
+        </script>
+    </body>
 </html>
