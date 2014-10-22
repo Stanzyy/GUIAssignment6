@@ -1,0 +1,62 @@
+/*
+Nicolas Stanzione
+ngstanzione@gmail.com
+I am a Senior majoring in Computer Science at UMass Lowell enrolled in 91.461
+File:C:\Users\Stanzy\Documents\NetBeansProjects\GUI6\public_html\GUI6CSS.css
+File created: 9/20/2014
+This site will serve as a dynamic multiplication table. This is the styling for it.
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Oxygen); /*import google font*/
+/*set background to thistle*/
+body {
+    background-color: #FFC9FF; /*thistle*/
+}
+/*set font and color for page */
+input, form, td, h1, button{
+    font-family: Oxygen, sans-serif; /*Oxygen is google font*/
+    color: indigo;
+}
+/* set size of font in form */
+input, form, button{
+    font-size: 18px;
+}
+
+/* next 4 margins are for aligning input boxes  and button*/
+button {
+    margin-left: 164px;
+}
+#start_vertical {
+    margin-left: 23px;
+}
+#end_vertical {
+    margin-left: 31px;
+}
+#end_horizontal {
+    margin-left: 8px;
+}
+/* table color and border */
+table {
+    border: 3px solid #331933; /*dark purple*/
+     
+    
+}
+/*make first row light blue */
+table tr:first-child td {
+    background: #97CCC4; /*light blue*/
+}
+/* make first column light blue */
+table tr td:first-child{
+    background: #97CCC4; /*light blue*/
+}
+/* all text in cells is centered*/
+td {
+    text-align: center;
+}
+/*clear the first element of the table because it is useless */
+table > tbody > tr:first-child > td:first-child {
+    background: #FFC9FF; /*thistle*/
+    color: #FFC9FF; /*thistle*/
+    border: none;
+    
+}
